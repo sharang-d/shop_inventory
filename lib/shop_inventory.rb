@@ -1,6 +1,5 @@
-require_relative 'shop_inventory\shopkeeper'
-require_relative 'shop_inventory\customer'
-
+require_relative 'shop_inventory/shopkeeper'
+require_relative 'shop_inventory/customer'
 
 class ShopInventory
 
@@ -10,8 +9,8 @@ class ShopInventory
     shopkeeper = Shopkeeper.new
 
     STDOUT.sync = true
-    print "Press 1 if you are the shopkeeper
-    Anything else if you are a customer: "
+    puts 'Press 1 if you are the shopkeeper'
+    print 'Anything else if you are a customer: '
     if(gets.strip == '1')
       loop do
         puts 'Enter 1 to add a new product'
