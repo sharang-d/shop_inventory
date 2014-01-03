@@ -1,0 +1,25 @@
+id: 1
+name: Vim Bar
+price: 12
+count: 10
+company: Vim
+id: 3
+name: Cornflakes
+price: 100
+count: 0
+company: Kellogg
+id: 4
+name: Hide n seek
+price: 20
+count: 20
+company: Parle
+id: 2
+name: Nirma
+price: 100
+count: 10
+company: Washing Powder Nirma
+id: 5
+name: air
+price: 100
+count: 1000
+company: test
