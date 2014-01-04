@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
 
+$inventory = ->{ File.expand_path(File.dirname(__FILE__)) + '/../lib/shop_inventory/inventory' }
+$orders = ->{ File.expand_path(File.dirname(__FILE__)) + '/../lib/shop_inventory/orders' }
 require 'shop_inventory'
 ShopInventory.start

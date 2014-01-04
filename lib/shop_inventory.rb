@@ -1,6 +1,8 @@
 require_relative 'shop_inventory/shopkeeper'
 require_relative 'shop_inventory/customer'
 
+
+
 class ShopInventory
 
   def self.start

@@ -5,7 +5,7 @@ class Product
 
   def self.add_product(name, price, count, company, id = nil)
     id = id ? id : get_max_id.succ
-    File.open('inventory', 'a') do |file|
+    File.open($inventory[], 'a') do |file|
       file.puts "id: #{id}"
       file.puts "name: #{name}"
       file.puts "price: #{price}"
@@ -15,10 +15,10 @@ class Product
   end
   
   def self.remove_product(id)
-    return if !File.exists?('inventory')
+    return if !File.exists?($inventory[])
     flag = false
     temp = Tempfile.new('inventory_temp')
-    File.open('inventory', 'r') do |file|
+    File.open($inventory[], 'r') do |file|
       until(file.eof?)
         line = file.readline
         line.match(/^id: (.*)/)
@@ -37,16 +37,16 @@ class Product
     end
     temp.close
     if flag
-      FileUtils.mv(temp.path, 'inventory')
+      FileUtils.mv(temp.path, $inventory[])
     else
       temp.unlink
     end
   end
 
   def self.get_product_by_id(id)
-    return nil if !File.exists?('inventory')
+    return nil if !File.exists?($inventory[])
     result = ''
-    File.open('inventory', 'r') do |file|
+    File.open($inventory[], 'r') do |file|
       until(file.eof?)
         line = file.readline
         temp_id = line.match(/^id: (.*)/)[1]
@@ -64,8 +64,8 @@ class Product
   private
   def self.get_max_id
     max = 0
-    return max if !File.exists?('inventory')
-    File.open('inventory', 'r') do |file|
+    return max if !File.exists?($inventory[])
+    File.open($inventory[], 'r') do |file|
       until(file.eof?)
         line = file.readline
         temp_id = line.match(/^id: (.*)/)[1].to_i

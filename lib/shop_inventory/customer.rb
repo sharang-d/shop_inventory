@@ -18,14 +18,14 @@ class Customer
         cc_number = gets.strip
         print 'Enter the cvv number for your credit card: '
         cvv_number = gets.strip
-        File.open('orders', 'a') do |file|
+        File.open($orders[], 'a') do |file|
           file.puts "Customer name: #{name}"
           file.puts "Credit card number: #{cc_number}"
           file.puts "CVV number: #{cvv_number}"
           file.puts "Item id: #{id}"
         end
         temp_file = Tempfile.new('inventory_temp')
-        File.open('inventory') do |file|
+        File.open($inventory[]) do |file|
           until(file.eof?)
             line = file.readline
             temp_id = line.match(/^id: (.*)/)[1].to_i
@@ -40,7 +40,7 @@ class Customer
             temp_file << file.readline
           end
           temp_file.close
-          FileUtils.mv(temp_file.path, 'inventory')
+          FileUtils.mv(temp_file.path, $inventory[])
           puts 'Transaction is successful'
         end
       else
@@ -53,7 +53,7 @@ class Customer
 
   private
   def in_stock?(id)
-    File.open('inventory') do |file|
+    File.open($inventory[]) do |file|
       until(file.eof?)
         line = file.readline
         temp_id = line.match(/^id: (.*)/)[1]

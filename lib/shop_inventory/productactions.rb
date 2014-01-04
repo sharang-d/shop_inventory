@@ -1,20 +1,20 @@
 module ProductActions
 
   def get_all_products
-    return 'No results' if !File.exists?('inventory')
-    result = File.read('inventory') 
+    return 'No results' if !File.exists?($inventory[])
+    result = File.read($inventory[]) 
     result ? result : 'No results'
   end
 
   def search_product_by_name
     print 'Enter name of the product you wish to search for: '
     name = gets.strip
-    if !File.exists?('inventory')
+    if !File.exists?($inventory[])
       puts 'No results'
       return
     end
     result = ''
-    File.open('inventory', 'r') do |file|
+    File.open($inventory[], 'r') do |file|
       until(file.eof?)
         id_line = file.readline
         line = file.readline
@@ -32,8 +32,8 @@ module ProductActions
   end
 
   def id_exists?(id)
-    return false if !File.exists?('inventory')
-    File.open('inventory', 'r') do |file|
+    return false if !File.exists?($inventory[])
+    File.open($inventory[], 'r') do |file|
       until(file.eof?)
         line = file.readline
         temp_id = line.match(/^id: (.*)/)[1]
